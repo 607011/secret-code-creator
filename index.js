@@ -62,22 +62,83 @@
 
     function onSymbolWidthChanged(e) {
         localStorage.setItem('secretcodecreator.options.symbolWidth', e.target.value);
-        updateVariables();
+        el.root.style.setProperty('--symbol-width', `${el.symbolWidth.value}px`);
     }
 
     function onSymbolHeightChanged(e) {
         localStorage.setItem('secretcodecreator.options.symbolHeight', e.target.value);
-        updateVariables();
+        el.root.style.setProperty('--symbol-height', `${el.symbolHeight.value}px`);
     }
 
     function onSymbolScaleChanged(e) {
         localStorage.setItem('secretcodecreator.options.symbolScale', e.target.value);
-        updateVariables();
+        el.root.style.setProperty('--symbol-scale', `${el.symbolScale.value}`);
     }
 
     function onSymbolPaddingChanged(e) {
         localStorage.setItem('secretcodecreator.options.symbolPadding', e.target.value);
-        updateVariables();
+        el.root.style.setProperty('--symbol-padding', `${el.symbolPadding.value}px`);
+    }
+
+    function onDragEnter(e) {
+        if (!e.dataTransfer.types.includes('Files')) {
+            e.dataTransfer.dropEffect = 'none';
+            e.preventDefault();
+            return false;
+        }
+        e.dataTransfer.dropEffect = 'copy';
+        e.target.classList.add('dragging');
+        e.preventDefault();
+    }
+
+    function onDragOver(e) {
+        if (!e.dataTransfer.types.includes('Files')) {
+            e.dataTransfer.dropEffect = 'none';
+            e.preventDefault();
+            return false;
+        }
+        e.dataTransfer.dropEffect = 'copy';
+        e.preventDefault();
+    }
+
+    function onDragLeave(e) {
+        e.dataTransfer.dropEffect = 'none';
+        e.target.classList.remove('dragging');
+        e.preventDefault();
+    }
+
+    function onDrop(e) {
+        e.target.classList.remove('dragging')
+        if (!e.dataTransfer.types.includes('Files'))
+            return e.preventDefault();
+
+        for (const item of e.dataTransfer.items) {
+            if (item.kind !== 'file' || item.type !== 'image/png')
+                break;
+            const imgFile = item.getAsFile();
+            const imgReader = new FileReader();
+            imgReader.onload = function () {
+                const dataURL = imgReader.result;
+                const image = new Image;
+                image.addEventListener('load', () => {
+                    if ((image.width / 8) !== Math.floor(image.width / 8)) {
+                        console.error('image width must be divisible by 8')
+                        return;
+                    }
+                    if ((image.height / 24) !== Math.floor(image.height / 24)) {
+                        console.error('image height must be divisible by 8')
+                        return;
+                    }
+                    el.root.style.setProperty('--image', `url(${dataURL})`);
+                    el.root.style.setProperty('--symbol-width', `${image.width / 8}px`);
+                    el.root.style.setProperty('--symbol-height', `${image.height / 24}px`);
+                    localStorage.setItem('secretcodecreator.image', `url(${dataURL})`);
+                }, false);
+                image.src = dataURL;
+            };
+            imgReader.readAsDataURL(imgFile);
+        }
+        e.preventDefault();
     }
 
     function onInputSelect(e) {
@@ -126,12 +187,10 @@
     }
 
     function updateVariables() {
-        document.head.querySelector('#css-variables').textContent = `:root {
---symbol-scale: ${el.symbolScale.value};
---symbol-width: ${el.symbolWidth.value}px;
---symbol-height: ${el.symbolHeight.value}px;
---symbol-padding: ${el.symbolPadding.value}px;
-}`;
+        el.root.style.setProperty('--symbol-scale', `${el.symbolScale.value}`);
+        el.root.style.setProperty('--symbol-width', `${el.symbolWidth.value}px`);
+        el.root.style.setProperty('--symbol-height', `${el.symbolHeight.value}px`);
+        el.root.style.setProperty('--symbol-padding', `${el.symbolPadding.value}px`);
     }
 
     function createStyles() {
@@ -153,7 +212,7 @@
     }
 
     function restoreOptions() {
-        el.input.value = localStorage.getItem('secretcodecreator.plaintext') || "";
+        el.input.value = localStorage.getItem('secretcodecreator.plaintext') || '';
         el.lineHeight.value = localStorage.getItem('secretcodecreator.options.lineHeight') || 1;
         el.direction.value = localStorage.getItem('secretcodecreator.options.direction') || 'ltr';
         el.writingMode.value = localStorage.getItem('secretcodecreator.options.writingMode') || 'horizontal-tb';
@@ -161,6 +220,7 @@
         el.symbolHeight.value = localStorage.getItem('secretcodecreator.options.symbolHeight') || 6;
         el.symbolScale.value = localStorage.getItem('secretcodecreator.options.symbolScale') || 4;
         el.symbolPadding.value = localStorage.getItem('secretcodecreator.options.symbolPadding') || 2;
+        el.root.style.setProperty('--image', localStorage.getItem('secretcodecreator.image') || 'none');
     }
 
     function main() {
@@ -184,9 +244,24 @@
         el.symbolPadding = document.querySelector('#symbol-padding');
         el.symbolPadding.addEventListener('change', onSymbolPaddingChanged);
         el.output = document.querySelector('#output');
+        el.output.addEventListener('dragenter', onDragEnter);
+        el.output.addEventListener('dragleave', onDragLeave);
+        el.output.addEventListener('dragover', onDragOver);
+        el.output.addEventListener('drop', onDrop);
+        el.root = document.querySelector(':root');
         restoreOptions();
         createStyles();
-        convert();
+        if (el.input.value.length !== 0) {
+            convert();
+        }
+        else {
+            if ([null, ''].includes(localStorage.getItem('secretcodecreator.image'))) {
+                el.output.appendChild(document.querySelector('#dropzone').content.cloneNode(true));
+            }
+            else {
+                el.output.textContent = '';
+            }
+        }
         updateVariables();
         el.output.style.writingMode = el.writingMode.value;
         el.output.style.direction = el.direction.value;

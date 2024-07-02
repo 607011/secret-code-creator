@@ -1,5 +1,12 @@
 :root {
     --outline-color: rgba(111, 250, 30, 0.9);
+    --bg-color: #f0f0f0;
+    --border-color: #080808;
+    --symbol-scale: 1;
+    --symbol-width: 10px;
+    --symbol-height: 6px;
+    --symbol-padding: 1px;
+    --image: none;
 }
 
 * {
@@ -12,15 +19,19 @@ body {
     padding: 10px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 10px;
+    background-color: #0b2965;
 }
 
 #input {
     width: 100%;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    padding: 0.5ex 0.5em;
 }
 
 .char {
-    background-image: url(data/pixel-font.png);
-    background-size: calc(80px * var(--symbol-scale)) calc(144px * var(--symbol-scale));
+    background-image: var(--image);
+    background-size: calc(var(--symbol-width) * 8 * var(--symbol-scale)) calc(var(--symbol-height) * 24 * var(--symbol-scale));
     background-repeat: no-repeat;
     display: inline-block;
     cursor: pointer;
@@ -42,8 +53,8 @@ body {
 
 .options {
     margin: 5px 0;
-    border: 1px solid black;
-    background-color: #f0f0f0;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
     display: flex;
     flex-direction: row;
 }
@@ -60,9 +71,15 @@ body {
 
 #output {
     display: block;
-    background-color: transparent;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
     padding: 10px;
+    min-height: 100px;
     max-height: 60%;
     max-width: 100%;
     overflow: scroll;
+}
+
+.dragging {
+    background-color: #d1e179 !important;
 }
