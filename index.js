@@ -121,18 +121,21 @@
                 const dataURL = imgReader.result;
                 const image = new Image;
                 image.addEventListener('load', () => {
-                    if ((image.width / 8) !== Math.floor(image.width / 8)) {
+                    const iw = image.width / 8;
+                    const ih = image.height / 24;
+                    if (iw !== Math.floor(iw)) {
                         console.error('image width must be divisible by 8')
                         return;
                     }
-                    if ((image.height / 24) !== Math.floor(image.height / 24)) {
+                    if (ih !== Math.floor(ih)) {
                         console.error('image height must be divisible by 8')
                         return;
                     }
+                    el.symbolWidth.value = iw;
+                    el.symbolHeight.value = ih;
                     el.root.style.setProperty('--image', `url(${dataURL})`);
-                    el.root.style.setProperty('--symbol-width', `${image.width / 8}px`);
-                    el.root.style.setProperty('--symbol-height', `${image.height / 24}px`);
                     localStorage.setItem('secretcodecreator.image', `url(${dataURL})`);
+                    updateVariables();
                 }, false);
                 image.src = dataURL;
             };
@@ -255,12 +258,7 @@
             convert();
         }
         else {
-            if ([null, ''].includes(localStorage.getItem('secretcodecreator.image'))) {
-                el.output.appendChild(document.querySelector('#dropzone').content.cloneNode(true));
-            }
-            else {
-                el.output.textContent = '';
-            }
+            el.output.appendChild(document.querySelector('#dropzone').content.cloneNode(true));
         }
         updateVariables();
         el.output.style.writingMode = el.writingMode.value;
