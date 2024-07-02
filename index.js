@@ -199,21 +199,21 @@
     }
 
     function createStyles() {
-        const styles = document.createElement('style');
         const firstIdx = 32;
         const rowWidth = 8;
         const pixW = parseInt(el.symbolWidth.value);
         const pixH = parseInt(el.symbolHeight.value);
+        let styles = '';
         for (let rowIdx = 0; rowIdx < 24; ++rowIdx) {
             for (let colIdx = 0; colIdx < rowWidth; ++colIdx) {
-                styles.textContent += `.c${colIdx + rowIdx * rowWidth + firstIdx} {
+                styles += `.c${colIdx + rowIdx * rowWidth + firstIdx} {
                     background-position: 
                     calc(-${colIdx * pixW}px * var(--symbol-scale)) 
                     calc(-${rowIdx * pixH}px * var(--symbol-scale));
-                }`;
+                }\n`;
             }
         }
-        document.head.appendChild(styles);
+        document.head.querySelector('#symbol-styles').textContent = styles;
     }
 
     function restoreOptions() {
