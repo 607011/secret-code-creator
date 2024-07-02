@@ -132,7 +132,9 @@
                         return;
                     }
                     el.symbolWidth.value = iw;
+                    localStorage.setItem('secretcodecreator.options.symbolWidth', iw);
                     el.symbolHeight.value = ih;
+                    localStorage.setItem('secretcodecreator.options.symbolHeight', ih);
                     el.root.style.setProperty('--image', `url(${dataURL})`);
                     localStorage.setItem('secretcodecreator.image', `url(${dataURL})`);
                     updateVariables();
