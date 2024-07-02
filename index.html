@@ -10,68 +10,69 @@
 
 <body>
     <main>
-    <div><textarea id="input" cols="100" rows="10" placeholder="Type or paste cleartext here ..."></textarea></div>
-    <div class="options">
-        <div>
-            <div>Direction</div>
+        <div><textarea id="input" cols="100" rows="10" placeholder="Type or paste cleartext here ..."></textarea></div>
+        <div class="options">
             <div>
-                <select name="direction" id="direction">
-                    <option value="ltr">&rarr;</option>
-                    <option value="rtl">&larr;</option>
-                </select>
+                <div>Direction</div>
+                <div>
+                    <select name="direction" id="direction">
+                        <option value="ltr">&rarr;</option>
+                        <option value="rtl">&larr;</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div>Writing mode</div>
+                <div>
+                    <select name="writing-mode" id="writing-mode">
+                        <option value="horizontal-tb">default</option>
+                        <option value="vertical-lr">&darr; &rarr;</option>
+                        <option value="vertical-rl">&darr; &larr;</option>
+                        <option value="sideways-lr">&rarr;</option>
+                        <option value="sideways-rl">&larr;</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div>Line height</div>
+                <div>
+                    <input name="scale" id="line-height" type="number" step="1" min="0" max="100" value="12" size="4" />
+                </div>
+            </div>
+            <div>
+                <div>Scale</div>
+                <div>
+                    <input name="scale" id="symbol-scale" type="number" step="1" min="1" max="100" value="4" size="4" />
+                </div>
+            </div>
+            <div>
+                <div>Symbol width</div>
+                <div>
+                    <input name="symbol-width" id="symbol-width" type="number" step="1" min="1" max="100" value="10"
+                        size="4" />
+                </div>
+            </div>
+            <div>
+                <div>Symbol height</div>
+                <div>
+                    <input name="symbol-height" id="symbol-height" type="number" step="1" min="1" max="100" value="6"
+                        size="4" />
+                </div>
+            </div>
+            <div>
+                <div>Symbol padding</div>
+                <div>
+                    <input name="symbol-padding" id="symbol-padding" type="number" step="1" min="0" max="10" value="0"
+                        size="4" />
+                </div>
             </div>
         </div>
-        <div>
-            <div>Writing mode</div>
-            <div>
-                <select name="writing-mode" id="writing-mode">
-                    <option value="horizontal-tb">default</option>
-                    <option value="vertical-lr">&darr; &rarr;</option>
-                    <option value="vertical-rl">&darr; &larr;</option>
-                    <option value="sideways-lr">&rarr;</option>
-                    <option value="sideways-rl">&larr;</option>
-                </select>
-            </div>
-        </div>
-        <div>
-            <div>Line height</div>
-            <div>
-                <input name="scale" id="line-height" type="number" step="1" min="0" max="100" value="12" size="4" />
-            </div>
-        </div>
-        <div>
-            <div>Scale</div>
-            <div>
-                <input name="scale" id="symbol-scale" type="number" step="1" min="1" max="100" value="4" size="4" />
-            </div>
-        </div>
-        <div>
-            <div>Symbol width</div>
-            <div>
-                <input name="symbol-width" id="symbol-width" type="number" step="1" min="1" max="100" value="10"
-                    size="4" />
-            </div>
-        </div>
-        <div>
-            <div>Symbol height</div>
-            <div>
-                <input name="symbol-height" id="symbol-height" type="number" step="1" min="1" max="100" value="6"
-                    size="4" />
-            </div>
-        </div>
-        <div>
-            <div>Symbol padding</div>
-            <div>
-                <input name="symbol-padding" id="symbol-padding" type="number" step="1" min="0" max="10" value="0"
-                    size="4" />
-            </div>
-        </div>
-    </div>
-    <div id="output"></div>
-</main>
-<footer>
-    &copy; 2024 Oliver Lau. <a href="https://github.com/607011/secret-code-creator" target="_blank">Source code</a> hosted on GitHub.
-</footer>
+        <div id="output"></div>
+    </main>
+    <footer>
+        &copy; 2024 Oliver Lau. <a href="https://github.com/607011/secret-code-creator" target="_blank">Source code</a>
+        hosted on GitHub.
+    </footer>
 
     <template id="dropzone">
         <div>Drop font image here, PNG only. Symbols must be in 8 &times; 24 grid.</div>
