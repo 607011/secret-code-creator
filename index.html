@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Secret Code Creator</title>
+    <style id="css-variables"></style>
+    <link rel="stylesheet" href="index.css">
+    <script async src="index.js"></script>
+</head>
+
+<body>
+    <div><textarea id="input" cols="100" rows="10" placeholder="Type cleartext here ..."></textarea></div>
+    <div class="options">
+        <div>
+            <div>Direction</div>
+            <div>
+                <select name="direction" id="direction">
+                    <option value="ltr">&rarr;</option>
+                    <option value="rtl">&larr;</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <div>Writing mode</div>
+            <div>
+                <select name="writing-mode" id="writing-mode">
+                    <option value="horizontal-tb">default</option>
+                    <option value="vertical-lr">&darr; &rarr;</option>
+                    <option value="vertical-rl">&darr; &larr;</option>
+                    <option value="sideways-lr">&rarr;</option>
+                    <option value="sideways-rl">&larr;</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <div>Line height</div>
+            <div>
+                <input name="scale" id="line-height" type="number" step="1" min="0" max="100" value="12" size="4" />
+            </div>
+        </div>
+        <div>
+            <div>Scale</div>
+            <div>
+                <input name="scale" id="symbol-scale" type="number" step="1" min="1" max="100" value="4" size="4" />
+            </div>
+        </div>
+        <div>
+            <div>Width</div>
+            <div>
+                <input name="symbol-width" id="symbol-width" type="number" step="1" min="1" max="100" value="10"
+                    size="4" />
+            </div>
+        </div>
+        <div>
+            <div>Height</div>
+            <div>
+                <input name="symbol-height" id="symbol-height" type="number" step="1" min="1" max="100" value="6"
+                    size="4" />
+            </div>
+        </div>
+        <div>
+            <div>Padding</div>
+            <div>
+                <input name="symbol-padding" id="symbol-padding" type="number" step="1" min="0" max="10" value="0"
+                    size="4" />
+            </div>
+        </div>
+    </div>
+    <div id="output"></div>
+</body>
+
+</html>
