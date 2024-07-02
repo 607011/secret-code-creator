@@ -63,6 +63,8 @@ body {
     display: flex;
     flex-direction: column;
     padding: 4px 7px;
+    font-weight: bold;
+    cursor: default;
 }
 
 .options>* {
@@ -88,8 +90,13 @@ body {
 footer {
     color: #f0f0f3;
     padding: 1ex 0.5em;
+    font-weight: bold;
 }
 
 footer a {
     color: #f3f3f8
+}
+
+footer a:visited {
+    color: #e1e1e7
 }
