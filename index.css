@@ -39,7 +39,7 @@ body {
     height: calc(var(--symbol-height) * var(--symbol-scale));
     image-rendering: -moz-crisp-edges;
     image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
+    image-rendering: pixelated;
     -ms-interpolation-mode: nearest-neighbor;
     margin: calc(var(--symbol-padding) * var(--symbol-scale)) calc(var(--symbol-padding) * var(--symbol-scale)) 0 0;
 }
