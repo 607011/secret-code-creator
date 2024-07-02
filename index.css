@@ -83,3 +83,12 @@ body {
 .dragging {
     background-color: #d1e179 !important;
 }
+
+footer {
+    color: #f0f0f3;
+    padding: 1ex 0.5em;
+}
+
+footer a {
+    color: #f3f3f8
+}
