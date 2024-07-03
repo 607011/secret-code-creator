@@ -269,5 +269,110 @@
         el.output.style.direction = el.direction.value;
         el.output.style.lineHeight = `${el.lineHeight.value}px`;
     }
+
+
+    function _type_it() {
+        const InterKeyLatency = 80;
+        const InterKeyLatencyVariation = 20;
+        const SpeedupCombos = [
+            'qw', 'we', 'er', 'rt', 'tz', 'zu', 'ui', 'io', 'op', 'pü',
+            'as', 'sd', 'df', 'fg', 'gh', 'hj', 'jk', 'kl', 'lö', 'öä',
+            'yx', 'xc', 'cv', 'vb', 'bn', 'nm'
+        ];
+        const SlowDownKeys = [
+            '.', ':', '\n', 
+        ];
+        const Text = `Kurzbericht des Amtes für interstellare Entwicklungshilfe
+Raumzeit 1337/42.326789, Terranische Zeit (TZ): 22. Dezember 1943
+
+Historie
+
+Unsere Fördermaßnahmen, die erstmals dem Mathematiker, Erfinder und Ingenieur Charles Babbage im Jahr 1836 TZ zuteil wurden, hatten rund 100 terranische Jahre später Früchte getragen. Der deutsche Bauingenieur Konrad Zuse schaffte es 1938, den ersten Universalcomputer zu bauen, die Z3. Es handelte sich um den ersten funktionsfähigen Digitalrechner des Planeten Terra. Wie schon ihr Vorläufer Z1 verwendet sie binäre Gleitkommaarithmetik, bekanntlich ein früher Wegbereiter des neuromorphen Computings auf Basis von Supraleitern.
+
+Der Hohe Rat sah es danach als erwiesen an, dass die Terraner ihre Entwicklung auch langfristig aus eigener Kraft vorantreiben können, und hat die Fördermaßnahmen eingestellt.
+
+Status quo
+
+Zurzeit tobt auf Terra der später so genannte Zweite Weltkrieg, in den sämtliche dortigen Großmächte involviert sind. In dessen Verlaufe wurde die von Konrad Zuse erbaute Rechenmaschine Z3 bei einem Bombenangriff der alliierten Streitmächte auf Berlin am 21. Dezember 1943 TZ zerstört. Das bedeutet einen herben Rückschlag in der Entwicklung der Computertechnik auf Terra.
+
+Obwohl Konrad Zuse nach seinem uns vorliegenden Bericht über seine Rechengeräte aus ökonomischen Erwägungen und zum Behufe der Betriebssicherheit an der mechanischen Relaistechnik festhalten will, wenngleich die Elektronenröhre bereits erfunden ist, ist die Bedeutung der Z3 für die Entwicklung der Bewohner des Planeten Terra so groß, dass das Amt in einer Eilsitzung beschlossen hat, den Hohen Rat darum zu ersuchen, die Förderung wieder aufzunehmen und den Wiederaufbau der Z3 alsbald in die Wege zu leiten.
+
+Kosten (in EE, gerundet):
+
+- Replizieren der Relais: 1.23e-12
+- Replizieren weiterer Bauteile: .61e-12
+- Transport: 6.77e-9
+- Sonstiges: .23e-12
+
+Folgenabschätzung: 
+
+1.) bei Wiederaufnahme der Förderung:
+
+- für die Terraner natürlich wirkende Entwicklung der Technik
+
+2.) wenn nichts unternommen wird:
+
+- akuter Rückfall der technischen Entwicklung zwar um nur wenige terranische Jahre, aber weit in die Zukunft reichende Folgen für die gesamtwirtschaftliche und technische Prosperität
+
+Gesuch
+
+Der Hohe Rat möge beschließen,
+
+- die Förderung terranischer Computertechnik wieder aufzunehmen und
+
+- als Soforthilfe die unter "Kosten" aufgeführten EE zu genehmigen.
+
+Ergebenst,
+AE23567894
+Präsident des Amtes für interstellare Entwicklungshilfe
+`;
+
+        const nextLetter = () => {
+            const dt = window.performance.now() - t0;
+            if (dt >= requiredTimeDelta) {
+                const currentLetter = Text[idx];
+                requiredTimeDelta = InterKeyLatency + Math.random() * InterKeyLatencyVariation;
+                if (lastLetter !== null) {
+                    const combo = `${lastLetter}${currentLetter}`;
+                    if ([lastLetter, ' '].includes(currentLetter)) {
+                        requiredTimeDelta /= 4;
+                    }
+                    if (SlowDownKeys.includes(currentLetter)) {
+                        requiredTimeDelta *= 1 + Math.random() * 2;
+                    }
+                    else if (SpeedupCombos.includes(combo.toLowerCase())) {
+                        requiredTimeDelta /= 2;
+                    }
+                }
+                el.input.value += currentLetter;
+                scrollToSelection(el.input, idx);
+                convert();
+                const currentSymbol = el.output.querySelector(`[data-idx="${idx}"]`)
+                currentSymbol.scrollIntoView({
+                    block: 'center',
+                    inline: 'center',
+                    behavior: 'smooth',
+                });
+                t0 = window.performance.now();
+                lastLetter = currentLetter;
+                ++idx;
+            }
+            if (idx < Text.length) {
+                window.requestAnimationFrame(nextLetter);
+            }
+        };
+
+        el.input.value = '';
+        let idx = 0;
+        let lastLetter = null;
+        let t0 = window.performance.now();
+        let requiredTimeDelta = InterKeyLatency;
+        window.requestAnimationFrame(nextLetter);
+    }
+
+    window.exports = {
+        typedemo: _type_it,
+    };
+
     window.addEventListener('load', main);
 })(window);
