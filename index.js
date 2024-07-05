@@ -353,7 +353,7 @@ Präsident des Amtes für interstellare Entwicklungshilfe
                 currentSymbol.scrollIntoView({
                     block: 'center',
                     inline: 'center',
-                    behavior: 'smooth',
+                    behavior: 'instant',
                 });
                 t0 = window.performance.now();
                 lastLetter = currentLetter;
