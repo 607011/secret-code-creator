@@ -40,10 +40,7 @@
         convert();
     }
 
-    function onChange(e) {
-        localStorage.setItem('secretcodecreator.plaintext', e.target.value);
-        convert();
-    }
+    const onChange = onInput;
 
     function onLineHeightChanged(e) {
         const lineHeight = e.target.value;
@@ -170,9 +167,7 @@
         }
     }
 
-    function onInputClick(e) {
-        onInputSelect(e);
-    }
+    const onInputClick = onInputSelect;
 
     function onGlyphSelect(e) {
         const idx = parseInt(e.target.getAttribute('data-idx'));
