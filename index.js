@@ -125,13 +125,13 @@
                 const image = new Image;
                 image.addEventListener('load', () => {
                     const iw = image.width / 8;
-                    const ih = image.height / 24;
+                    const ih = image.height / 28;
                     if (iw !== Math.floor(iw)) {
                         console.error('image width must be divisible by 8')
                         return;
                     }
                     if (ih !== Math.floor(ih)) {
-                        console.error('image height must be divisible by 24')
+                        console.error('image height must be divisible by 28')
                         return;
                     }
                     el.symbolWidth.value = iw;
@@ -139,7 +139,11 @@
                     el.symbolHeight.value = ih;
                     localStorage.setItem('secretcodecreator.options.symbolHeight', ih);
                     el.root.style.setProperty('--image', `url(${dataURL})`);
+                    el.root.style.setProperty('--image-width', `${image.width}px`);
+                    el.root.style.setProperty('--image-height', `${image.height}px`);
                     localStorage.setItem('secretcodecreator.image', `url(${dataURL})`);
+                    localStorage.setItem('secretcodecreator.imageWidth', `${image.width}px`);
+                    localStorage.setItem('secretcodecreator.imageHeight', `${image.height}px`);
                     updateCssVariables();
                     createStyles();
                 }, false);
@@ -228,6 +232,8 @@
         el.symbolScale.value = localStorage.getItem('secretcodecreator.options.symbolScale') || 4;
         el.symbolPadding.value = localStorage.getItem('secretcodecreator.options.symbolPadding') || 2;
         el.root.style.setProperty('--image', localStorage.getItem('secretcodecreator.image') || Default.Image);
+        el.root.style.setProperty('--image-width', localStorage.getItem('secretcodecreator.imageWidth') || 0);
+        el.root.style.setProperty('--image-height', localStorage.getItem('secretcodecreator.imageHeight') || 0);
     }
 
     function main() {
