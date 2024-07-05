@@ -276,6 +276,7 @@
         const InterKeyLatency = 80;
         const InterKeyLatencyVariation = 20;
         const SpeedupCombos = [
+            '12', '23', '34', '45', '56', '67', '78', '89', '90',
             'qw', 'we', 'er', 'rt', 'tz', 'zu', 'ui', 'io', 'op', 'pü',
             'as', 'sd', 'df', 'fg', 'gh', 'hj', 'jk', 'kl', 'lö', 'öä',
             'yx', 'xc', 'cv', 'vb', 'bn', 'nm'
