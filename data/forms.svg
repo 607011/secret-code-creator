@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg width="80" height="280" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <!-- SPACE -->
+    <g>
+        <path d="M0,0 h10 v10 h-10 Z" fill="orange">
+            <animate
+                attributeName="d"
+                dur="619ms"
+                values="M0,0 h10 v10 h-10 Z;
+                        M5,0 L10,5 L5,10 L0,5 Z"
+                repeatCount="indefinite"/>
+        </path>
+    </g>
+    <!-- red cross -->
+    <g>
+        <path d="M63,0 h4 v3 h3 v4 h-3 v3 h-4 v-3 h-3 v-4 h3 v-3 Z" style="fill:#eb596f;">
+            <animate
+                attributeName="d"
+                dur="1.15s"
+                values="M63,0 h4 v3 h3 v4 h-3 v3 h-4 v-3 h-3 v-4 h3 v-3 Z;
+                        M60,0 h3 v3 h-3 M67,0 h3 v3 h-3 M67,7 h3 v3 h-3 M60,7 h3 v3 h-3 Z"
+                repeatCount="indefinite" />
+        </path>
+    </g>
+    <!-- light green circle -->
+    <g transform-origin="15px 5px">
+        <circle cx="15" cy="5" r="5" style="fill:#00ff8f;"/>
+        <animateTransform
+            attributeName="transform"
+            attributeType="xml"
+            type="scale"
+            values="1,1;0.5,0.5;1,1"
+            dur="1.5s"
+            calcMode="spline"
+            keyTimes="0;0.5;1"
+            keySplines="0.42 0 0.58 1;0.1 0.8 0.9 0.1"
+            repeatCount="indefinite" />
+    </g>
+    <!-- yellow star -->
+    <g transform-origin="25px 5px">
+        <path d="M25,0c0.669,2.266 2.589,3.8 4.755,3.8c-1.752,1.401 -2.485,3.883 -1.816,6.15c-1.753,-1.401 -4.125,-1.401 -5.878,-0c0.669,-2.267 -0.064,-4.749 -1.816,-6.15c2.166,0 4.086,-1.534 4.755,-3.8Z" style="fill:#ffd200;"></path>
+        <animateTransform
+            attributeName="transform"
+            attributeType="xml"
+            type="rotate"
+            values="0 0 0;36 0 0;72 0 0;108 0 0;144 0 0;180 0 0;216 0 0;252 0 0;288 0 0;324 0 0"
+            dur="2.3s"
+            calcMode="discrete"
+            repeatCount="indefinite" />
+    </g>
+    <!-- light green hexagonal star -->
+    <g>
+        <path d="M55,0c0.893,1.547 2.544,2.5 4.33,2.5c-0.893,1.547 -0.893,3.453 0,5c-1.786,0 -3.437,0.953 -4.33,2.5c-0.893,-1.547 -2.544,-2.5 -4.33,-2.5c0.893,-1.547 0.893,-3.453 -0,-5c1.786,0 3.437,-0.953 4.33,-2.5Z" style="fill:#00ffca;"/>
+        <animateTransform
+            attributeName="transform"
+            attributeType="xml"
+            type="rotate"
+            from="360 55 5"
+            to="0 55 5"
+            dur="3s"
+            repeatCount="indefinite" />
+    </g>
+    <!-- red triangle -->
+    <g transform-origin="35px 5px">
+        <path d="M30,0l10,9.95l-10,-0l0,-9.95Z" style="fill:#fa502c;"/>
+            <animateTransform
+            attributeName="transform"
+            attributeType="xml"
+            type="scale"
+            values="1,1;-1,-1;1,1"
+            calcMode="discrete"
+            dur="1.5s"
+            repeatCount="indefinite" />
+    </g>
+    <!-- violet octagon -->
+    <g transform-origin="75px 5px">
+        <path d="M70,3l3,-3l4,0l3,3l0,4l-3,2.95l-4,-0l-3,-2.95l0,-4Z" style="fill:;#806A71">
+            <animate
+                attributeType="xml"
+                attributeName="fill"
+                values="#806A71;#FF548F;#806A71;#FFF154;#806A71"
+                dur="1.4s"
+                repeatCount="indefinite"/>
+        </path>
+        <animateTransform
+            attributeName="transform"
+            attributeType="xml"
+            type="rotate"
+            from="0 0 0"
+            to="360 0 0"
+            dur="1.9s"
+            repeatCount="indefinite" />
+        <animateTransform
+            attributeName="transform"
+            attributeType="xml"
+            additive="sum"
+            type="scale"
+            values="0.9,0.9;0.7,0.7;0.9,0.9"
+            dur="3.1s"
+            repeatCount="indefinite" />
+    </g>
+    <!-- violet triangle -->
+    <g transform-origin="45px 5px">
+        <path d="M50,0l-10,9.95l10,-0l0,-9.95Z" style="fill:#e800ff;"/>
+        <animateTransform
+            attributeName="transform"
+            attributeType="xml"
+            type="scale"
+            values="1,1;-1,-1;1,1"
+            calcMode="discrete"
+            dur="2s"
+            repeatCount="indefinite" />
+    </g>
+</svg>
